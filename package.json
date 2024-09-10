@@ -1,0 +1,27 @@
+{
+  "name": "dev-mate-cli",
+  "version": "0.0.1",
+  "description": "command line tool using LLMs for code optimization",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mayank-Pareek/dev-mate-cli.git"
+  },
+  "keywords": [
+    "cli"
+  ],
+  "author": "Mayank Kumar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mayank-Pareek/dev-mate-cli/issues"
+  },
+  "homepage": "https://github.com/mayank-Pareek/dev-mate-cli#readme",
+  "devDependencies": {
+    "@types/node": "^22.5.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.2"
+  }
+}
