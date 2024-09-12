@@ -6,7 +6,7 @@ const program = new Command();
 program
   .name('dev-mate-cli')
   .description('CLI tool for code documentation')
-  .version('0.0.1', '-v, --vers', 'output the current version')
+  .version('0.0.1', '-v, --version', 'output the current version')
   .option(
     '-m,--model <model-name>',
     'specify the model to use',
