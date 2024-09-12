@@ -28,7 +28,7 @@ const aiResponse = async (data: string): Promise<void> => {
           },
           { role: 'user', content: data },
         ],
-        temperature: 1.1,
+        temperature: parseFloat(program.opts().temperature),
       });
       if (program.opts().output) {
         await processFile(
