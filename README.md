@@ -47,13 +47,13 @@ A command-line tool that leverages OpenAI's Chat Completion API to document code
 To run the tool, specify one or more source files as input:
 
 ```bash
-npm start ./example/file1.js
+npm start ./examples/file.js
 ```
 
 For processing multiple files:
 
 ```bash
-npm start ./example/file1.js ./example/file1.js
+npm start ./examples/file.js ./examples/file.cpp
 ```
 
 ## Command-line Options
@@ -93,13 +93,13 @@ Note: Use `npm start -- -option` to pass the option flag to the program, as npm 
 - **Document a JavaScript file and save the result:**
 
   ```bash
-  npm start ./example/file.js -- --output file-documented.js --model google/gemini-flash-8b-1.5-exp
+  npm start ./examples/file.js -- --output file-documented.js --model google/gemini-flash-8b-1.5-exp
   ```
 
 - **Process multiple files and print output to the console:**
 
   ```bash
-  npm start ./example/file.js ./example/file.js --model google/gemini-flash-8b-1.5-exp
+  npm start ./examples/file.js ./examples/file.py --model google/gemini-flash-8b-1.5-exp
   ```
 
 ## Debugging and Logs
