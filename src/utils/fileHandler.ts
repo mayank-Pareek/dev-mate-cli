@@ -1,5 +1,11 @@
 import fs from 'fs/promises';
 
+/**
+ * Receive a file and process it
+ * @param filePath Path of file to process
+ * @param operation Operation to perform on file
+ * @param data Data received from AI model's response
+ */
 export async function processFile(
   filePath: string,
   operation: 'read' | 'write',

@@ -4,6 +4,7 @@ import { processFile } from './utils/fileHandler';
 
 let aiConnection: OpenAI | null = null;
 
+//setup connection using api key and base url from .env
 export const initializeConnection = () => {
   try {
     aiConnection = new OpenAI({
@@ -15,12 +16,20 @@ export const initializeConnection = () => {
   }
 };
 
+/**
+ * Generate response from AI and write on stdout or to a file.
+ * @param {string} data Data read from files passed in arguments
+ */
+
 const aiResponse = async (data: string): Promise<void> => {
+  //get data from files passed in argument and generate response
   if (aiConnection)
+    //check if the connection was setup
     try {
       const completion = await aiConnection.chat.completions.create({
-        model: program.opts().model,
+        model: program.opts().model, //get model from arguments or use program default
         messages: [
+          //define messages for system and user
           {
             role: 'system',
             content:
@@ -28,9 +37,10 @@ const aiResponse = async (data: string): Promise<void> => {
           },
           { role: 'user', content: data },
         ],
-        temperature: parseFloat(program.opts().temperature),
+        temperature: parseFloat(program.opts().temperature), //get temp from arguments or use program default
       });
       if (program.opts().output) {
+        //if output file is passed write response to file
         await processFile(
           program.opts().output,
           'write',
