@@ -1,6 +1,6 @@
 import { Command } from 'commander';
 import aiResponse from './ai';
-import { openFile } from './fileHandler';
+import { processFile } from './utils/fileHandler';
 const program = new Command();
 
 program
@@ -16,10 +16,9 @@ program
   .argument('<files...>')
   .action(function (files: string[]) {
     files.forEach((file) => {
-      openFile(file).then((data) => {
+      processFile(file, 'read').then((data) => {
         if (data) {
-          //Send data to chat model
-          console.log(data);
+          aiResponse(data);
         } else {
           console.warn('received empty or unsupported file');
         }
@@ -32,10 +31,9 @@ program
   .description('Add comments and document the provided source code')
   .argument('<input-file>', 'File containing the source code')
   .action((file: string) => {
-    openFile(file).then((data) => {
+    processFile(file, 'read').then((data) => {
       if (data) {
-        //Send data to chat model
-        console.log(data);
+        aiResponse(data);
       } else {
         console.warn('received empty or unsupported file');
       }
