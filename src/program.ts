@@ -15,6 +15,7 @@ program
   .option('-o,--output <output-file>', 'file to output response')
   .argument('<files...>')
   .action(function (files: string[]) {
+    // Loop through the provided files
     files.forEach((file) => {
       processFile(file, 'read').then((data) => {
         if (data) {

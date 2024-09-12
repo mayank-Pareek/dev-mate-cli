@@ -1,4 +1,6 @@
 import OpenAI from 'openai';
+import program from './program';
+import { processFile } from './utils/fileHandler';
 
 let aiConnection: OpenAI | null = null;
 
@@ -13,15 +15,31 @@ export const initializeConnection = () => {
   }
 };
 
-const aiResponse = async (data: string) => {
+const aiResponse = async (data: string): Promise<void> => {
   if (aiConnection)
     try {
       const completion = await aiConnection.chat.completions.create({
-        model: 'google/gemma-2-9b-it:free',
-        messages: [{ role: 'user', content: data }],
+        model: program.opts().model,
+        messages: [
+          {
+            role: 'system',
+            content:
+              'Return only the code with added comments, no explanations.',
+          },
+          { role: 'user', content: data },
+        ],
         temperature: 1.1,
       });
-      console.log(completion.choices[0].message.content);
+      if (program.opts().output) {
+        await processFile(
+          program.opts().output,
+          'write',
+          completion.choices[0].message.content,
+        );
+        console.log(`Documented code written to ${program.opts().output}`);
+      } else {
+        console.log(completion.choices[0].message.content);
+      }
     } catch (error: any) {
       if (error.code === 400) {
         console.error(
