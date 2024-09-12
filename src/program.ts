@@ -15,17 +15,20 @@ program
   .option('-o,--output <output-file>', 'file to output response')
   .option('-t, --temperature <temperature>', 'set the model temperature', '0.5')
   .argument('<files...>')
-  .action(function (files: string[]) {
-    // Loop through the provided files
-    files.forEach((file) => {
-      processFile(file, 'read').then((data) => {
+  .action(async function (files: string[]) {
+    //Loop through files and process them
+    for (const file of files) {
+      try {
+        const data = await processFile(file, 'read');
         if (data) {
-          aiResponse(data);
+          await aiResponse(data);
         } else {
           console.warn('received empty or unsupported file');
         }
-      });
-    });
+      } catch (error) {
+        console.error('Error processing file:', error);
+      }
+    }
   });
 
 export default program;
