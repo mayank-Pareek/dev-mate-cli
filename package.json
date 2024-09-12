@@ -1,6 +1,6 @@
 {
   "name": "dev-mate-cli",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "command line tool using LLMs for code optimization",
   "main": "index.js",
   "scripts": {
