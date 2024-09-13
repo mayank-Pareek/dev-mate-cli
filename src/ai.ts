@@ -33,7 +33,7 @@ const aiResponse = async (data: string): Promise<void> => {
           {
             role: 'system',
             content:
-              'Return only the code with added comments, no explanations.',
+              'Return only the code with added comments, no explanations and without any code block delimiters (e.g., triple backticks).',
           },
           { role: 'user', content: data },
         ],
