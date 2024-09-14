@@ -35,9 +35,8 @@ export async function processFile(
       await fs.appendFile(filePath, data);
     }
   } catch (error) {
-    console.error(
-      `Error ${operation === 'read' ? 'reading from' : 'writing to'} file:`,
-      error,
+    throw new Error(
+      `Failed ${operation === 'read' ? 'reading from' : 'writing to'} file:${filePath}. ${error}`,
     );
   }
 }
