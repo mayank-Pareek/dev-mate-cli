@@ -4,7 +4,9 @@ import fs from 'fs/promises';
  * Receive a file and process it
  * @param filePath Path of file to process
  * @param operation Operation to perform on file
- * @param data Data received from AI model's response
+ * @param data Data to write to file (only for 'write' operation)
+ * @returns File content for 'read' operation, void for 'write' operation
+ * @throws Error if file operations fail or if input is invalid
  */
 export async function processFile(
   filePath: string,
@@ -13,15 +15,18 @@ export async function processFile(
 ): Promise<string | void> {
   try {
     if (operation === 'read') {
-      return await fs.readFile(filePath, 'utf-8');
+      const fileData = await fs.readFile(filePath, 'utf-8');
+      if (fileData.trim() === '') {
+        throw new Error('File is empty');
+      }
+      return fileData;
     } else if (operation === 'write' && data) {
-      await fs.writeFile(filePath, data);
+      await fs.appendFile(filePath, data);
     }
   } catch (error) {
     console.error(
       `Error ${operation === 'read' ? 'reading from' : 'writing to'} file:`,
       error,
     );
-    throw error;
   }
 }
