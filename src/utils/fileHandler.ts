@@ -21,6 +21,17 @@ export async function processFile(
       }
       return fileData;
     } else if (operation === 'write' && data) {
+      // Check if file exists and has content
+      try {
+        const existingData = await fs.readFile(filePath, 'utf-8');
+        if (existingData.trim() !== '') {
+          console.warn(
+            `Warning: File ${filePath} already contains data. New data will be appended.`,
+          );
+        }
+      } catch (error) {
+        // File doesn't exist or can't be read, which is fine for a write operation
+      }
       await fs.appendFile(filePath, data);
     }
   } catch (error) {
