@@ -7,6 +7,9 @@ let aiConnection: OpenAI | null = null;
 //setup connection using api key and base url from .env
 export const initializeConnection = () => {
   try {
+    if (!(process.env.BASE_URL && process.env.API_KEY)) {
+      throw new Error('Missing environment variable[s].');
+    }
     aiConnection = new OpenAI({
       baseURL: process.env.BASE_URL as string,
       apiKey: process.env.API_KEY as string,
@@ -51,10 +54,12 @@ const aiResponse = async (data: string): Promise<void> => {
         console.log(completion.choices[0].message.content);
         //display token usage if requested
         if (program.opts().tokenUsage) {
-          console.error('Token Usage:\n',
+          console.error(
+            'Token Usage:\n',
             `Completion Tokens: ${completion.usage?.completion_tokens}\n`,
             `Prompt Tokens: ${completion.usage?.prompt_tokens}\n`,
-            `Total Tokens: ${completion.usage?.total_tokens}\n`);
+            `Total Tokens: ${completion.usage?.total_tokens}\n`,
+          );
         }
       }
     } catch (error: any) {

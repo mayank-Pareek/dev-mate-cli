@@ -1,6 +1,6 @@
 # dev-mate-cli
 
-A command-line tool that leverages OpenAI's Chat Completion API and LLMs from OpenRouter to document code with the assistance of AI models.
+A command-line tool that leverages OpenAI's Chat Completion API to document code with the assistance of AI models.
 Watch this [Demo video](https://youtu.be/YJDD6YBaEFk) to view features.
 
 ## Features
@@ -9,7 +9,6 @@ Watch this [Demo video](https://youtu.be/YJDD6YBaEFk) to view features.
 - **Multiple File Processing**: Handle one or multiple files in a single command.
 - **Model Selection**: Choose which AI model to use with the `--model` flag.
 - **Custom Output**: Output the results to a file with the `--output` flag, or display them in the console.
-- **API Key and Configuration**: Manage API credentials via a `.env` file.
 
 ## Installation
 
@@ -28,16 +27,16 @@ Watch this [Demo video](https://youtu.be/YJDD6YBaEFk) to view features.
 
 3. **Set up environment variables:**
 
-   Create a `.env` file in the project’s root directory with the following configuration:
+   Create a `.env` file in the project’s root directory with the following configuration, get `API_KEY` and `BASE_URL` from model provider of your choice:
 
    ```bash
-   API_KEY=your_openrouter_api_key
-   BASE_URL=https://api.openai.com/v1
+   API_KEY=your_api_key
+   BASE_URL=base_url
    ```
 
 4. **Set up LLM configuration:**
 
-   Open `config.json` file from the project’s root directory and edit default configuration to customize LLM. Visit [OpenRouter](https://openrouter.ai/models/) to browse models.
+   Open `config.json` file from the project’s root directory and edit default configuration to customize LLM. Visit your API Key provider and browse models. Make sure to use the same provider for API Key and LLM.
 
 5. **Build the TypeScript files:**
 
@@ -65,7 +64,7 @@ npm start ./examples/file.js ./examples/file.cpp
 
 Note: Use `npm start -- -option` to pass the option flag to the program, as npm captures it without the `--`.
 
-- `-m, --model <model-name>`: Choose the AI model to use `(default: google/gemma-2-9b-it:free)`.
+- `-m, --model <model-name>`: Choose the AI model to use `(default: google/gemma-2-9b-it:free from OpenRouter)`.
 
   ```bash
   npm start file.js -- -m "openai/gpt-4o-mini"
@@ -124,7 +123,7 @@ Note: Use `npm start -- -option` to pass the option flag to the program, as npm 
 You can store your api key and base url in a `.env` file created at the root of the project. Example configuration:
 
 ```makefile
-API_KEY=your_openrouter_api_key
+API_KEY=your_api_key
 BASE_URL=https://api.openai.com/v1
 ```
 
