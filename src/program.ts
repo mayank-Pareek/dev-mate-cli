@@ -16,8 +16,8 @@ const loadConfig = (filePath: string): Config => {
   const configData = JSON.parse(data);
   //validate parsed data
   if (
-    typeof config.model !== 'string' ||
-    typeof config.temperature !== 'string'
+    typeof configData.model !== 'string' ||
+    typeof configData.temperature !== 'string'
   ) {
     console.error('Missing or invalid LLM configuration, check config.json');
   }
