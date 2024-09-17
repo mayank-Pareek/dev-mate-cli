@@ -1,0 +1,4 @@
+{
+  "model": "google/gemma-2-9b-it:free",
+  "temperature": "0.7"
+}
