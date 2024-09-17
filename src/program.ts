@@ -14,6 +14,7 @@ program
   )
   .option('-o,--output <output-file>', 'file to output response') // Option to specify the output file
   .option('-t, --temperature <temperature>', 'set the model temperature', '0.5') // Option to set the model temperature
+  .option('-u, --token-usage', 'output token usage data') // Option to display token usage data
   .argument('<files...>') // Define the required file argument
   .action(async function (files: string[]) {
     //Loop through files and process them
