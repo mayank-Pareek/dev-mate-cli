@@ -49,6 +49,13 @@ const aiResponse = async (data: string): Promise<void> => {
         console.log(`Documented code written to ${program.opts().output}`);
       } else {
         console.log(completion.choices[0].message.content);
+        //display token usage if requested
+        if (program.opts().tokenUsage) {
+          console.error('Token Usage:\n',
+            `Completion Tokens: ${completion.usage?.completion_tokens}\n`,
+            `Prompt Tokens: ${completion.usage?.prompt_tokens}\n`,
+            `Total Tokens: ${completion.usage?.total_tokens}\n`);
+        }
       }
     } catch (error: any) {
       if (error.code === 400) {

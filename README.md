@@ -78,6 +78,12 @@ Note: Use `npm start -- -option` to pass the option flag to the program, as npm 
   npm start file.js -- -t 1.1
   ```
 
+- `-u, --token-usage`: Display token usage information
+
+  ```bash
+  npm start file.js -- -u
+  ```
+
 ### Additional Commands
 
 - **Check Version:** To check the current version of the tool, use:
