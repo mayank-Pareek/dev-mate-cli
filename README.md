@@ -1,6 +1,6 @@
 # dev-mate-cli
 
-A command-line tool that leverages OpenAI's Chat Completion API to document code with the assistance of AI models.
+A command-line tool that leverages OpenAI's Chat Completion API and LLMs from OpenRouter to document code with the assistance of AI models.
 Watch this [Demo video](https://youtu.be/YJDD6YBaEFk) to view features.
 
 ## Features
@@ -35,7 +35,11 @@ Watch this [Demo video](https://youtu.be/YJDD6YBaEFk) to view features.
    BASE_URL=https://api.openai.com/v1
    ```
 
-4. **Build the TypeScript files:**
+4. **Set up LLM configuration:**
+
+   Open `config.json` file from the project’s root directory and edit default configuration to customize LLM. Visit [OpenRouter](https://openrouter.ai/models/) to browse models.
+
+5. **Build the TypeScript files:**
 
    ```bash
    npm run build
@@ -73,7 +77,8 @@ Note: Use `npm start -- -option` to pass the option flag to the program, as npm 
   npm start file.js -- -o output.js
   ```
 
-- `-t, --temperature <value>`: Set the creativity level of the AI model `(default: 0.5)`.
+- `-t, --temperature <value>`: Set the creativity level of the AI model `(default: 0.7)`.
+
   ```bash
   npm start file.js -- -t 1.1
   ```
@@ -119,7 +124,7 @@ Note: Use `npm start -- -option` to pass the option flag to the program, as npm 
 You can store your api key and base url in a `.env` file created at the root of the project. Example configuration:
 
 ```makefile
-API_KEY=your_openai_api_key
+API_KEY=your_openrouter_api_key
 BASE_URL=https://api.openai.com/v1
 ```
 
