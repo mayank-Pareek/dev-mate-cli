@@ -1,12 +1,14 @@
 import { Command } from 'commander';
 import aiResponse from './ai';
 import { processFile } from './utils/fileHandler';
+import { name, version } from '../package.json';
+
 const program = new Command();
 
 program
-  .name('dev-mate-cli')
+  .name(name)
   .description('CLI tool for code documentation')
-  .version('0.1.0', '-v, --version', 'output the current version') // Set the version number and command to display it
+  .version(`${name} v${version}`, '-v, --version', 'output the current version') // Set the version number and command to display it
   .option(
     '-m,--model <model-name>', // Option to specify the AI model
     'specify the model to use',
