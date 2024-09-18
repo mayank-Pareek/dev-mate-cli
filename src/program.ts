@@ -1,13 +1,13 @@
 import { Command } from 'commander';
 import aiResponse from './ai';
 import { processFile } from './utils/fileHandler';
-import { name, version } from '../package.json';
+import { name, version, description } from '../package.json';
 
 const program = new Command();
 
 program
   .name(name)
-  .description('CLI tool for code documentation')
+  .description(description)
   .version(`${name} v${version}`, '-v, --version', 'output the current version') // Set the version number and command to display it
   .option(
     '-m,--model <model-name>', // Option to specify the AI model
