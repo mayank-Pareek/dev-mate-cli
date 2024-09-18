@@ -2,6 +2,8 @@ import { Command } from 'commander';
 import aiResponse from './ai';
 import * as fs from 'fs';
 import { processFile } from './utils/fileHandler';
+import { name, version, description } from '../package.json';
+
 const program = new Command();
 
 //Configuration for LLM Model
@@ -28,9 +30,9 @@ const loadConfig = (filePath: string): Config => {
 const config: Config = loadConfig('./config.json');
 
 program
-  .name('dev-mate-cli')
-  .description('CLI tool for code documentation')
-  .version('0.1.0', '-v, --version', 'output the current version') // Set the version number and command to display it
+  .name(name)
+  .description(description)
+  .version(`${name} v${version}`, '-v, --version', 'output the current version') // Set the version number and command to display it
   .option(
     '-m,--model <model-name>', // Option to specify the AI model
     'specify the model to use, check available models at https://openrouter.ai/models/',
