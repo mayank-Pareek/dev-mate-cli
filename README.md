@@ -27,12 +27,12 @@ Watch this [Demo video](https://youtu.be/YJDD6YBaEFk) to view features.
 
 3. **Set up environment variables:**
 
-   Create a `.env` file in the project’s root directory with the following configuration, get `API_KEY` and `BASE_URL` from model provider of your choice:
-
+   Create a `.env` file in the project’s root directory by making a copy of `.env.example` file:
    ```bash
-   API_KEY=your_api_key
-   BASE_URL=base_url
-   ```
+   cp .env.example .env
+    ```
+   Replace `API_KEY` and `BASE_URL` values with an API Key and URL generated from a Open AI's chat completion API compatible LLM provider.
+   
 
 4. **Set up LLM configuration:**
 
