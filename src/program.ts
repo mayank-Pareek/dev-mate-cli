@@ -40,6 +40,7 @@ program
     config.model,
   )
   .option('-o,--output <output-file>', 'file to output response') // Option to specify the output file
+  .option('-s, --stream', 'stream response to command line') // // Option to specify response streaming
   .option(
     '-t, --temperature <temperature>',
     'set the model temperature',
