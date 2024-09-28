@@ -28,11 +28,12 @@ Watch this [Demo video](https://youtu.be/YJDD6YBaEFk) to view features.
 3. **Set up environment variables:**
 
    Create a `.env` file in the project’s root directory by making a copy of `.env.example` file:
+
    ```bash
    cp .env.example .env
-    ```
+   ```
+
    Replace `API_KEY` and `BASE_URL` values with an API Key and URL generated from a Open AI's chat completion API compatible LLM provider.
-   
 
 4. **Set up LLM configuration:**
 
@@ -92,6 +93,12 @@ Note: Use `npm start -- -option` to pass the option flag to the program, as npm 
 
   ```bash
   npm start file.js -- -u
+  ```
+
+- `-s, --stream`: Stream response to command line
+
+  ```bash
+  npm start file.js -- -s
   ```
 
 ### Additional Commands
