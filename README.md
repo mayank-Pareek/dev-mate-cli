@@ -48,7 +48,7 @@ Watch this [Demo video](https://youtu.be/YJDD6YBaEFk) to view features.
 
 ### Basic Usage
 
-To run the tool, specify one or more source files as input:
+To run the tool, specify one or more source files or folders as input:
 
 ```bash
 npm start ./examples/file.js
@@ -58,6 +58,12 @@ For processing multiple files:
 
 ```bash
 npm start ./examples/file.js ./examples/file.cpp
+```
+
+For processing folders:
+
+```bash
+npm start ./examples
 ```
 
 ## Command-line Options
