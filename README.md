@@ -38,8 +38,25 @@ Watch this [Demo video](https://youtu.be/YJDD6YBaEFk) to view features.
    Replace `API_KEY` and `BASE_URL` values with an API Key and URL generated from a Open AI's chat completion API compatible LLM provider.
 
 4. **Set up LLM configuration:**
+   There are 2 ways that you can set up your configuration:
 
-   Open `config.json` file from the project’s root directory and edit default configuration to customize LLM. Visit your API Key provider and browse models. Make sure to use the same provider for API Key and LLM.
+- Open `config.json` file from the project’s root directory and edit default configuration to customize LLM. Visit your API Key provider and browse models. Make sure to use the same provider for API Key and LLM.
+
+- Open your home directory in your system, create a hidden file (a file starting with a dot) with `.toml` as file type
+
+Ex: `~/.your-toolname-config.toml`:
+
+```
+model = "gpt-4o"
+temperature = "1"
+
+```
+
+`Notes`:
+
+- When the user runs your tool, it will search for a config file in the home dir and use those values. Or, if the user specifies values via args, those will override the default ones in the config.
+
+- Currently, There is only 2 arguments that needs user to provide their input, they are `temperature`, `model`, and `output`. The program should ignore any options in the config file it doesn't recognize.
 
 5. **Build the TypeScript files:**
 
