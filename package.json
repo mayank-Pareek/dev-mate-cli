@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "commander": "^12.1.0",
-    "openai": "^4.58.2"
+    "openai": "^4.58.2",
+    "toml": "^3.0.0"
   }
 }

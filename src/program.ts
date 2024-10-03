@@ -4,6 +4,8 @@ import * as fs from 'fs';
 import { processFile } from './utils/fileHandler';
 import { name, version, description } from '../package.json';
 import path from 'path';
+import * as toml from 'toml';
+import * as os from 'os';
 
 const program = new Command();
 
@@ -11,24 +13,46 @@ const program = new Command();
 interface Config {
   model: string;
   temperature: string;
+  output: string;
 }
 
 // Function to load the configuration
-const loadConfig = (filePath: string): Config => {
-  const data = fs.readFileSync(filePath, 'utf-8');
-  const configData = JSON.parse(data);
-  //validate parsed data
-  if (
-    typeof configData.model !== 'string' ||
-    typeof configData.temperature !== 'string'
-  ) {
-    console.error('Missing or invalid LLM configuration, check config.json');
+const loadConfig = (): Config => {
+  const homeDir = os.homedir();
+  const tomlFiles = fs
+    .readdirSync(homeDir)
+    .filter((file) => file.endsWith('.toml') && file.startsWith('.'));
+
+  if (tomlFiles.length > 0) {
+    const configFilePath = path.join(homeDir, tomlFiles[0]);
+    const configFileContent = fs.readFileSync(configFilePath, 'utf-8');
+    try {
+      const configData = toml.parse(configFileContent);
+      return configData;
+    } catch (error) {
+      console.log(
+        'Error parsing toml file',
+        (error as Error)?.message || error,
+      );
+      process.exit(1);
+    }
+  } else {
+    const filePath = './config.json';
+    const data = fs.readFileSync(filePath, 'utf-8');
+    const configData = JSON.parse(data);
+    //validate parsed data
+    if (
+      typeof configData.model !== 'string' ||
+      typeof configData.temperature !== 'string'
+    ) {
+      console.error('Missing or invalid LLM configuration, check config.json');
+    }
+    return configData;
   }
-  return configData;
 };
 
 // Load config from the config.json file
-const config: Config = loadConfig('./config.json');
+const config: Config = loadConfig();
 
 program
   .name(name)
@@ -39,7 +63,7 @@ program
     'specify the model to use, check available models at https://openrouter.ai/models/',
     config.model,
   )
-  .option('-o,--output <output-file>', 'file to output response') // Option to specify the output file
+  .option('-o,--output <output-file>', 'file to output response', config.output) // Option to specify the output file
   .option('-s, --stream', 'stream response to command line') // // Option to specify response streaming
   .option(
     '-t, --temperature <temperature>',
@@ -48,7 +72,17 @@ program
   ) // Option to set the model temperature
   .option('-u, --token-usage', 'output token usage data') // Option to display token usage data
   .argument('<paths...>') // Define the required path argument
-  .action(async function (paths: string[]) {
+  .action(async function (paths: string[], options) {
+    // Final configuration
+    const finalConfig = {
+      model: options.model || config.model,
+      temperature: options.temperature || config.temperature,
+      output: options.output || config.output || 'stdout stream',
+    };
+    console.log(`temperature: ${finalConfig.temperature}`);
+    console.log(`model: ${finalConfig.model}`);
+    console.log(`output: ${finalConfig.output}`);
+
     // Loop through paths and process them
     for (const p of paths) {
       try {
