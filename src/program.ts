@@ -73,16 +73,6 @@ program
   .option('-u, --token-usage', 'output token usage data') // Option to display token usage data
   .argument('<paths...>') // Define the required path argument
   .action(async function (paths: string[], options) {
-    // Final configuration
-    const finalConfig = {
-      model: options.model || config.model,
-      temperature: options.temperature || config.temperature,
-      output: options.output || config.output || 'stdout stream',
-    };
-    console.log(`temperature: ${finalConfig.temperature}`);
-    console.log(`model: ${finalConfig.model}`);
-    console.log(`output: ${finalConfig.output}`);
-
     // Loop through paths and process them
     for (const p of paths) {
       try {
