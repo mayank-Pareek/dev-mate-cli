@@ -9,6 +9,7 @@ Watch this [Demo video](https://youtu.be/YJDD6YBaEFk) to view features.
 - **Multiple File Processing**: Handle one or multiple files in a single command.
 - **Model Selection**: Choose which AI model to use with the `--model` flag.
 - **Custom Output**: Output the results to a file with the `--output` flag, or display them in the console.
+- **Stream Output**: Stream the LLM response to command line with `--stream` flag.
 
 ## Installation
 
