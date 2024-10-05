@@ -1,7 +1,9 @@
 # dev-mate-cli
 
 A command-line tool that leverages OpenAI's Chat Completion API to document code with the assistance of AI models.
-Watch this [Demo video](https://youtu.be/YJDD6YBaEFk) to view features.
+
+**Demo Video:**
+[![Demo video](https://img.youtube.com/vi/YJDD6YBaEFk/0.jpg)](https://youtu.be/YJDD6YBaEFk)
 
 ## Features
 
@@ -41,21 +43,16 @@ Watch this [Demo video](https://youtu.be/YJDD6YBaEFk) to view features.
 
 - Open `config.json` file from the project’s root directory and edit default configuration to customize LLM. Visit your API Key provider and browse models. Make sure to use the same provider for API Key and LLM.
 
-- Open your home directory in your system, create a hidden file (a file starting with a dot) with `.toml` as file type
+- Open the home directory in your system and create a `dotfile` with `.toml` extension
 
-Ex: `~/.your-toolname-config.toml`:
+  Ex: `~/.config.toml`:
 
-```
-model = "gpt-4o"
-temperature = "1"
+  ```
+  model = "gpt-4o"
+  temperature = "1"
+  ```
 
-```
-
-`Notes`:
-
-- When the user runs your tool, it will search for a config file in the home dir and use those values. Or, if the user specifies values via args, those will override the default ones in the config.
-
-- Currently, There is only 2 arguments that needs user to provide their input, they are `temperature`, `model`, and `output`. The program should ignore any options in the config file it doesn't recognize.
+  **Note**: The tool searches the home directory for a config file and uses its values as defaults, with command-line arguments taking precedence.
 
 5. **Build the TypeScript files:**
 
@@ -144,11 +141,6 @@ Note: Use `npm start -- -option` to pass the option flag to the program, as npm 
   npm start ./examples/file.js ./examples/file.py --model google/gemini-flash-8b-1.5-exp
   ```
 
-## Debugging and Logs
-
-- All debug information and errors are output to `stderr`.
-- The main results are sent to `stdout`, ensuring clean separation between logs and the actual output.
-
 ## Environment Variables
 
 You can store your api key and base url in a `.env` file created at the root of the project. Example configuration:
@@ -159,14 +151,6 @@ BASE_URL=https://api.openai.com/v1
 ```
 
 This setup will also allow you to customize other settings, like temperature or base URL, directly in the `.env` file.
-
-## Future Enhancements
-
-Planned improvements for this tool include:
-
-- **Additional Transformations**: Convert code between different programming languages.
-- **Response Streaming**: Stream output for larger responses.
-- **Code Review**: Code review capabilities with more detailed AI feedback.
 
 ## Contributing
 
