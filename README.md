@@ -2,8 +2,7 @@
 
 A command-line tool that leverages OpenAI's Chat Completion API to document code with the assistance of AI models.
 
-**Demo Video:**
-[![Demo video](https://img.youtube.com/vi/YJDD6YBaEFk/0.jpg)](https://youtu.be/YJDD6YBaEFk)
+Watch this [Demo video](https://youtu.be/YJDD6YBaEFk) to view features.
 
 ## Features
 
