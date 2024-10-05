@@ -1,5 +1,3 @@
-#I just created Draft PR
-
 # dev-mate-cli
 
 A command-line tool that leverages OpenAI's Chat Completion API to document code with the assistance of AI models.
