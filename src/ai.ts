@@ -47,7 +47,7 @@ const aiResponse = async (data: string): Promise<void> => {
         // If streaming, iterate through the async iterable response
         let collectedChunks: string[] = [];
         for await (const chunk of completion) {
-          const chunkMessage = chunk.choices[0].delta?.content;
+          const chunkMessage = chunk.choices?.[0].delta?.content;
           if (chunkMessage) {
             collectedChunks.push(chunkMessage);
             if (!program.opts().output) {
@@ -64,8 +64,8 @@ const aiResponse = async (data: string): Promise<void> => {
         }
       } else {
         // Handle non-streaming response
-        const messageContent = completion.choices[0].message.content;
-        if (messageContent !== null) {
+        const messageContent = completion.choices?.[0]?.message?.content;
+        if (messageContent !== undefined) {
           // Write the full response to the specified output file
           if (program.opts().output) {
             await processFile(program.opts().output, 'write', messageContent);
@@ -87,9 +87,7 @@ const aiResponse = async (data: string): Promise<void> => {
       }
     } catch (error: any) {
       if (error.code === 400) {
-        console.error(
-          'Model abc is not available, choose another model or leave blank for default',
-        );
+        console.error('selected model is not available, choose another model');
       } else {
         console.error(error);
       }
