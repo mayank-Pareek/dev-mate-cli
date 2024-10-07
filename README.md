@@ -40,18 +40,18 @@ Watch this [Demo video](https://youtu.be/YJDD6YBaEFk) to view features.
 4. **Set up LLM configuration:**
    There are 2 ways that you can set up your configuration:
 
-- Open `config.json` file from the project’s root directory and edit default configuration to customize LLM. Visit your API Key provider and browse models. Make sure to use the same provider for API Key and LLM.
+- Open `.dev-mate-cli.json` file from the project’s root directory and edit default configuration to customize LLM. Visit your API Key provider and browse models. Make sure to use the same provider for API Key and LLM.
 
-- Open the home directory in your system and create a `dotfile` with `.toml` extension
+- Open the home directory in your system and create a `dotfile` named `.dev-mate-cli.toml`
 
-  Ex: `~/.config.toml`:
+  Ex: `~/.dev-mate-cli.toml`:
 
   ```
   model = "gpt-4o"
   temperature = "1"
   ```
 
-  **Note**: The tool searches the home directory for a config file and uses its values as defaults, with command-line arguments taking precedence.
+  **Note**: The tool first searches the home directory for a config file, then searches in project's root directory and uses the parsed values as defaults, however command-line arguments will take precedence over both.
 
 5. **Build the TypeScript files:**
 
