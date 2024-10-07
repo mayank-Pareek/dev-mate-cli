@@ -1,58 +1,12 @@
 import { Command } from 'commander';
-import aiResponse from './ai';
-import * as fs from 'fs';
-import { processFile } from './utils/fileHandler';
-import { name, version, description } from '../package.json';
 import path from 'path';
-import * as toml from 'toml';
-import * as os from 'os';
+import * as fs from 'fs';
+import aiResponse from './ai';
+import { processFile } from './utils/fileHandler';
+import config from './utils/loadConfig';
+import { name, version, description } from '../package.json';
 
 const program = new Command();
-
-//Configuration for LLM Model
-interface Config {
-  model: string;
-  temperature: string;
-  output: string;
-}
-
-// Function to load the configuration
-const loadConfig = (): Config => {
-  const homeDir = os.homedir();
-  const tomlFiles = fs
-    .readdirSync(homeDir)
-    .filter((file) => file.endsWith('.toml') && file.startsWith('.'));
-
-  if (tomlFiles.length > 0) {
-    const configFilePath = path.join(homeDir, tomlFiles[0]);
-    const configFileContent = fs.readFileSync(configFilePath, 'utf-8');
-    try {
-      const configData = toml.parse(configFileContent);
-      return configData;
-    } catch (error) {
-      console.log(
-        'Error parsing toml file',
-        (error as Error)?.message || error,
-      );
-      process.exit(1);
-    }
-  } else {
-    const filePath = './config.json';
-    const data = fs.readFileSync(filePath, 'utf-8');
-    const configData = JSON.parse(data);
-    //validate parsed data
-    if (
-      typeof configData.model !== 'string' ||
-      typeof configData.temperature !== 'string'
-    ) {
-      console.error('Missing or invalid LLM configuration, check config.json');
-    }
-    return configData;
-  }
-};
-
-// Load config from the config.json file
-const config: Config = loadConfig();
 
 program
   .name(name)
@@ -61,14 +15,18 @@ program
   .option(
     '-m,--model <model-name>', // Option to specify the AI model
     'specify the model to use, check available models at https://openrouter.ai/models/',
-    config.model,
+    config?.model,
   )
-  .option('-o,--output <output-file>', 'file to output response', config.output) // Option to specify the output file
+  .option(
+    '-o,--output <output-file>',
+    'file to output response',
+    config?.output,
+  ) // Option to specify the output file
   .option('-s, --stream', 'stream response to command line') // // Option to specify response streaming
   .option(
     '-t, --temperature <temperature>',
     'set the model temperature',
-    config.temperature,
+    config?.temperature,
   ) // Option to set the model temperature
   .option('-u, --token-usage', 'output token usage data') // Option to display token usage data
   .argument('<paths...>') // Define the required path argument
