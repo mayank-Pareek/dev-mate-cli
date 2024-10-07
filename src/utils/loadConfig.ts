@@ -58,9 +58,10 @@ const config: Config | null = loadConfig();
 // Check if data types in file are appropriate
 if (config) {
   if (
-    typeof config.model != 'string' ||
-    typeof config.temperature != 'string' ||
-    typeof config.output != 'string'
+    (config.model !== undefined && typeof config.model != 'string') ||
+    (config.temperature !== undefined &&
+      typeof config.temperature != 'string') ||
+    (config.output !== undefined && typeof config.output != 'string')
   ) {
     console.error('error in configuration data types, must be string');
     process.exit(1);
