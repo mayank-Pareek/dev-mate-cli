@@ -1,8 +1,6 @@
 import { Command } from 'commander';
-import path from 'path';
-import * as fs from 'fs';
 import aiResponse from './ai';
-import { processFile } from './utils/fileHandler';
+import { processFilesAndCollectData } from './utils/fileHandler';
 import config from './utils/loadConfig';
 import { name, version, description } from '../package.json';
 
@@ -30,42 +28,20 @@ program
   ) // Option to set the model temperature
   .option('-u, --token-usage', 'output token usage data') // Option to display token usage data
   .argument('<paths...>') // Define the required path argument
-  .action(async function (paths: string[], options) {
-    // Loop through paths and process them
-    for (const p of paths) {
-      try {
-        const stat = fs.statSync(p); // Check if it's a file or directory
+  .action(async function (paths: string[]) {
+    try {
+      // Call the new function to process files and collect their data
+      const filesData = await processFilesAndCollectData(paths);
 
-        if (stat.isDirectory()) {
-          // If it's a directory, read its contents
-          const files = fs.readdirSync(p);
-          for (const file of files) {
-            const filePath = path.join(p, file);
-            await processFileAndRespond(filePath);
-          }
-        } else if (stat.isFile()) {
-          // If a file, process it directly
-          await processFileAndRespond(p);
-        } else {
-          console.warn(`'${p}' is neither a file nor a directory.`);
-        }
-      } catch (error) {
-        console.error('Error processing path:', error);
+      if (filesData) {
+        await aiResponse(filesData); // Call AI response with all the data at once
+      } else {
+        console.warn('No valid data found in the provided files.');
       }
+    } catch (error) {
+      console.error('Error processing files:', error);
+      process.exit(1);
     }
   });
-
-async function processFileAndRespond(filePath: string) {
-  try {
-    const data = await processFile(filePath, 'read'); // Process the file content
-    if (data) {
-      await aiResponse(data); // Send the processed data to the ai function
-    } else {
-      console.warn('Received empty or unsupported file:', filePath);
-    }
-  } catch (error) {
-    console.error('Error processing file:', filePath, error);
-  }
-}
 
 export default program;

@@ -1,4 +1,5 @@
 import fs from 'fs/promises';
+import path from 'path';
 
 /**
  * Receive a file and process it
@@ -39,4 +40,42 @@ export async function processFile(
       `Failed ${operation === 'read' ? 'reading from' : 'writing to'} file:${filePath}. ${error}`,
     );
   }
+}
+
+/**
+ * Process multiple files and collect their data, recursively traversing directories.
+ * @param paths Array of file paths or directories
+ * @returns Concatenated data from all the files
+ * @throws Error if file processing fails
+ */
+export async function processFilesAndCollectData(
+  paths: string[],
+): Promise<string> {
+  let combinedData = '';
+
+  // Function to check paths recursively
+  async function processPath(p: string) {
+    try {
+      const stat = await fs.stat(p); // Check if it's a file or directory
+      if (stat.isDirectory()) {
+        const files = await fs.readdir(p); // Read directory contents
+        for (const file of files) {
+          const filePath = path.join(p, file);
+          await processPath(filePath); // Recursively process each file or directory
+        }
+      } else if (stat.isFile()) {
+        const data = await processFile(p, 'read'); // Process the file directly
+        if (data) combinedData += data + '\n'; // Collect file data
+      } else {
+        console.warn(`'${p}' is neither a file nor a directory.`);
+      }
+    } catch (error) {
+      console.error('Error processing path:', error);
+    }
+  }
+
+  for (const p of paths) {
+    await processPath(p); // Process each path (file or directory) provided
+  }
+  return combinedData.trim(); // Return concatenated file data
 }
