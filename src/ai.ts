@@ -42,12 +42,13 @@ export const initializeConnection = (): void => {
 };
 
 // Function to handle AI responses
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const handleAIResponse = async (completion: any, options: AIOptions) => {
   let promptTokens = 0,
     completionTokens = 0,
     totalTokens = 0;
   if (options.stream && isAsyncIterable(completion)) {
-    let collectedChunks: string[] = [];
+    const collectedChunks: string[] = [];
     for await (const chunk of completion) {
       // PRocess chunks of response stream
       const chunkMessage = chunk.choices?.[0].delta?.content;

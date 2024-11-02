@@ -1,0 +1,21 @@
+# Ignore node_modules and build output
+node_modules/
+dist/
+build/
+
+# Ignore environment and configuration files
+.env
+.env.*.local
+*.config.js
+*.config.cjs
+.eslintrc.json
+package.json
+package-lock.json
+
+# Ignore coverage and test snapshots
+coverage/
+**/*.snap
+
+# Ignore generated files
+*.min.js
+*.bundle.js

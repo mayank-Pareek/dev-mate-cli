@@ -30,6 +30,7 @@ export async function processFile(
             `Warning: File ${filePath} already contains data. New data will be appended.`,
           );
         }
+        // eslint-disable-next-line no-unused-vars
       } catch (error) {
         // File doesn't exist or can't be read, which is fine for a write operation
       }
@@ -54,6 +55,7 @@ export async function processFilesAndCollectData(
   let combinedData = '';
 
   // Function to check paths recursively
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   async function processPath(p: string) {
     try {
       const stat = await fs.stat(p); // Check if it's a file or directory

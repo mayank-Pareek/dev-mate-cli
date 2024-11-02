@@ -12,53 +12,6 @@ Watch this [Demo video](https://youtu.be/YJDD6YBaEFk) to view features.
 - **Custom Output**: Output the results to a file with the `--output` flag, or display them in the console.
 - **Stream Output**: Stream the LLM response to command line with `--stream` flag.
 
-## Installation
-
-1. **Clone the repository:**
-
-   ```bash
-   git clone https://github.com/mayank-Pareek/dev-mate-cli.git
-   cd dev-mate-cli
-   ```
-
-2. **Install dependencies:**
-
-   ```bash
-   npm install
-   ```
-
-3. **Set up environment variables:**
-
-   Create a `.env` file in the project’s root directory by making a copy of `.env.example` file:
-
-   ```bash
-   cp .env.example .env
-   ```
-
-   Replace `API_KEY` and `BASE_URL` values with an API Key and URL generated from a Open AI's chat completion API compatible LLM provider.
-
-4. **Set up LLM configuration:**
-   There are 2 ways that you can set up your configuration:
-
-- Open `.dev-mate-cli.json` file from the project’s root directory and edit default configuration to customize LLM. Visit your API Key provider and browse models. Make sure to use the same provider for API Key and LLM.
-
-- Open the home directory in your system and create a `dotfile` named `.dev-mate-cli.toml`
-
-  Ex: `~/.dev-mate-cli.toml`:
-
-  ```
-  model = "gpt-4o"
-  temperature = "1"
-  ```
-
-  **Note**: The tool first searches the home directory for a config file, then searches in project's root directory and uses the parsed values as defaults, however command-line arguments will take precedence over both.
-
-5. **Build the TypeScript files:**
-
-   ```bash
-   npm run build
-   ```
-
 ## Usage
 
 ### Basic Usage
@@ -81,7 +34,7 @@ For processing folders:
 npm start ./examples
 ```
 
-## Command-line Options
+### Command-line Options
 
 Note: Use `npm start -- -option` to pass the option flag to the program, as npm captures it without the `--`.
 
@@ -153,7 +106,7 @@ This setup will also allow you to customize other settings, like temperature or 
 
 ## Contributing
 
-Contributions are welcome! If you find a bug or have an idea for an improvement, feel free to [open an issue](https://github.com/mayank-Pareek/dev-mate-cli/issues) or submit a pull request.
+Contributions are welcome! If you find a bug or have an idea for an improvement, feel free to [open an issue](https://github.com/mayank-Pareek/dev-mate-cli/issues) or submit a pull request, view Contribution Guidelines for more details[https://github.com/mayank-Pareek/dev-mate-cli/blob/main/CONTRIBUTING.md].
 
 ## License
 
