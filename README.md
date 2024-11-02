@@ -106,7 +106,7 @@ This setup will also allow you to customize other settings, like temperature or 
 
 ## Contributing
 
-Contributions are welcome! If you find a bug or have an idea for an improvement, feel free to [open an issue](https://github.com/mayank-Pareek/dev-mate-cli/issues) or submit a pull request, view Contribution Guidelines for more details[https://github.com/mayank-Pareek/dev-mate-cli/blob/main/CONTRIBUTING.md].
+Contributions are welcome! If you find a bug or have an idea for an improvement, feel free to [open an issue](https://github.com/mayank-Pareek/dev-mate-cli/issues) or submit a pull request, view [Contribution Guidelines](CONTRIBUTING.md) for more details.
 
 ## License
 
