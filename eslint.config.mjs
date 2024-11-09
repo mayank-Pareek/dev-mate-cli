@@ -14,6 +14,10 @@ export default [
       '*.json',
       '*.lock',
     ],
+    env: {
+      node: true,
+      es2021: true,
+    },
   },
 
   js.configs.recommended,
@@ -21,7 +25,7 @@ export default [
 
   // TypeScript configuration
   {
-    files: ['**/*.ts'],
+    files: ['**/*.ts', '**/*.js'],
     languageOptions: {
       parser: typescriptParser,
       parserOptions: {

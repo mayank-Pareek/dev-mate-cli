@@ -95,6 +95,19 @@ This project uses ESLint with Prettier to maintain code quality and consistent s
 
   ESLint configuration is in `.eslint.config.mjs` file.
 
+### Running Tests
+
+The project uses Jest for unit testing. All test files are written in TypeScript and are stored in the `tests/unit/` directory. Please test your changes before committing using the following scripts:
+
+- Run all tests once with: `npm run test`
+- Continuously run tests on file changes: `npm run test:watch`
+- Generate test coverage: `npm run coverage`
+
+#### Writing and Organizing Tests
+- All new test files should be added to the `tests/unit/` directory.
+- Name your test files with `.test.ts` extension to ensure they are compatible with Jest.
+
+
 ### License
 
 By contributing to dev-mate-cli, you agree that your contributions will be licensed under the MIT License.

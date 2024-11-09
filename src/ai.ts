@@ -97,7 +97,7 @@ const handleAIResponse = async (completion: any, options: AIOptions) => {
 };
 
 // Generate response from AI
-const aiResponse = async (data: string): Promise<void> => {
+export const aiResponse = async (data: string): Promise<void> => {
   if (!aiConnection) return;
 
   try {
@@ -125,5 +125,3 @@ const aiResponse = async (data: string): Promise<void> => {
     }
   }
 };
-
-export default aiResponse;
