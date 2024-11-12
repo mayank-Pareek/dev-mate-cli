@@ -14,15 +14,14 @@ interface AIOptions {
 }
 
 // Function to get AI options, with fallback model and temperature
-const getAIOptions = (): AIOptions => {
+export const getAIOptions = (): AIOptions => {
+  const opts = program.opts() || {};
   return {
-    model: program.opts().model || 'google/gemma-2-9b-it:free',
-    temperature: program.opts().temperature
-      ? parseFloat(program.opts().temperature)
-      : 0.7,
-    stream: program.opts().stream,
-    output: program.opts().output,
-    tokenUsage: program.opts().tokenUsage,
+    model: opts.model || 'google/gemma-2-9b-it:free',
+    temperature: opts.temperature ? parseFloat(opts.temperature) : 0.7,
+    stream: opts.stream,
+    output: opts.output,
+    tokenUsage: opts.tokenUsage,
   };
 };
 

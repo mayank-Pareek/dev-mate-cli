@@ -1,12 +1,13 @@
 import { OpenAI } from 'openai';
-import { aiResponse, initializeConnection } from '../../src/ai';
+import { aiResponse, initializeConnection, getAIOptions } from '../../src/ai';
+import program from '../../src/program';
 
 jest.mock('openai');
 jest.mock('commander', () => ({
   Command: jest.fn().mockImplementation(() => ({
     opts: () => ({
-      model: 'google/gemma-2-9b-it:free',
-      temperature: '0.7',
+      model: 'google/gemini-flash-1.5-exp',
+      temperature: '0.6',
       stream: false,
       output: null,
       tokenUsage: false,
@@ -106,5 +107,33 @@ describe('AI Response Tests', () => {
       'Error connecting to OpenAI:',
       new Error('Missing environment variable[s].'),
     );
+  });
+});
+
+/**
+ * Tests for getAIOptions
+ */
+describe('getAIOptions Test', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('should use default options when no parameters are passed', () => {
+    jest.spyOn(program, 'opts').mockReturnValueOnce({});
+    const options = getAIOptions();
+    expect(options.model).toBe('google/gemma-2-9b-it:free');
+    expect(options.temperature).toBe(0.7);
+    expect(options.output).toBeUndefined;
+    expect(options.stream).toBeUndefined;
+    expect(options.tokenUsage).toBeUndefined;
+  });
+
+  it('should use passed parameters', () => {
+    const options = getAIOptions();
+    expect(options.model).toBe('google/gemini-flash-1.5-exp');
+    expect(options.temperature).toBe(0.6);
+    expect(options.output).toBeUndefined;
+    expect(options.stream).toBeUndefined;
+    expect(options.tokenUsage).toBeUndefined;
   });
 });

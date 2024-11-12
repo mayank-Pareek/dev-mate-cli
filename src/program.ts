@@ -1,5 +1,5 @@
 import { Command } from 'commander';
-import {aiResponse} from './ai';
+import { aiResponse } from './ai';
 import { processFilesAndCollectData } from './utils/fileHandler';
 import config from './utils/loadConfig';
 import { name, version, description } from '../package.json';
