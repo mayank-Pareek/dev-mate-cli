@@ -13,12 +13,13 @@ interface Config {
 /**
  * Load configuration from .toml or fallback to .json
  */
-const loadConfig = (): Config | null => {
+export const loadConfig = (): Config | null => {
   const homeDir = os.homedir();
   const configFilePath = path.join(homeDir, '.dev-mate-cli.toml');
   let configFileContent;
   try {
     // Try loading from .toml file first
+    console.log(`Reading TOML config from ${configFilePath}`);
     configFileContent = fs.readFileSync(configFilePath, 'utf-8');
     try {
       return toml.parse(configFileContent);
