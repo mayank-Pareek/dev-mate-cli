@@ -1,17 +1,31 @@
-import fs from 'fs';
-import os from 'os';
-import path from 'path';
-import { loadConfig } from '../../src/utils/loadConfig';
-import { json } from 'stream/consumers';
+// Variables to store original console functions
+const originalConsoleError = console.error;
+const originalConsoleLog = console.log;
 
+// Mock dependencies before importing modules
+console.error = jest.fn();
+console.log = jest.fn();
 jest.mock('fs');
 jest.mock('os');
 jest.mock('path');
 
+import fs from 'fs';
+import os from 'os';
+import path from 'path';
+import { loadConfig } from '../../src/utils/loadConfig';
+
 describe('Testing loadConfig.ts', () => {
-  afterEach(() => {
-    jest.resetAllMocks();
+  beforeEach(() => {
+    jest.clearAllMocks();
   });
+
+  // Cleanup after all tests
+  afterAll(() => {
+    // Restore original console methods
+    console.error = originalConsoleError;
+    console.log = originalConsoleLog;
+  });
+
   describe('Testing loadConfig() function', () => {
     test('should load configuration from .toml file', () => {
       const tomlContent = `
@@ -55,7 +69,6 @@ describe('Testing loadConfig.ts', () => {
         temperature: '0.7',
         output: 'text',
       });
-
       (os.homedir as jest.Mock).mockReturnValue('/mock/home/dir');
       (path.join as jest.Mock).mockReturnValue(
         '/mock/home/dir/.dev-mate-cli.toml',
@@ -83,6 +96,7 @@ describe('Testing loadConfig.ts', () => {
         temperature: '0.7',
         output: text,
       `;
+
       (os.homedir as jest.Mock).mockReturnValue('/mock/home/dir');
       (path.join as jest.Mock).mockReturnValue(
         '/mock/home/dir/.dev-mate-cli.toml',

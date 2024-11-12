@@ -1,7 +1,3 @@
-import { OpenAI } from 'openai';
-import { aiResponse, initializeConnection, getAIOptions } from '../../src/ai';
-import program from '../../src/program';
-
 jest.mock('openai');
 jest.mock('commander', () => ({
   Command: jest.fn().mockImplementation(() => ({
@@ -21,6 +17,10 @@ jest.mock('commander', () => ({
     argument: jest.fn().mockReturnThis(),
   })),
 }));
+
+import { OpenAI } from 'openai';
+import { aiResponse, initializeConnection, getAIOptions } from '../../src/ai';
+import program from '../../src/program';
 
 describe('AI Response Tests', () => {
   // Captured JSON response for mock
