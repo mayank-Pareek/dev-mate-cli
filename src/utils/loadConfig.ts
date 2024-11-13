@@ -18,8 +18,6 @@ export const loadConfig = (): Config | null => {
   const configFilePath = path.join(homeDir, '.dev-mate-cli.toml');
   let configFileContent: string;
   try {
-    // Try loading from .toml file first
-    console.log(`Reading TOML config from ${configFilePath}`);
     configFileContent = fs.readFileSync(configFilePath, 'utf-8');
     try {
       return toml.parse(configFileContent);
