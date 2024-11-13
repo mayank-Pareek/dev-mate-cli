@@ -75,25 +75,31 @@ I encourage you to submit bug reports and feature requests through issues on Git
 - Code Quality: Please ensure your code follows the existing coding style.
 - Documentation: Update the documentation if your changes require it.
 
-### Code Formatting
+### Code Formatting and Linting
 
-This project uses [Prettier](https://prettier.io/) to ensure consistent code style. Please follow these steps before committing:
+This project uses [Biome](https://biomejs.dev/) to ensure consistent code quality and style. Please ensure your code meets our standards by using the provided npm scripts.
 
-- Format all files: `npm run format`
-- Check formatting: `npm run format:check`
-- Format specific files: `npm run format:fix`
+#### Available Commands
+_________________________
+| Command | Description |
+|---------|-------------|
+| `npm run format` | Check all files for formatting issues |
+| `npm run format:changed` | Check formatting only in changed files |
+| `npm run format:fix` | Automatically fix formatting issues across all files |
 
-  Prettier configuration is in `.prettierrc`, with excluded files listed in `.prettierignore`.
+| Command | Description |
+|---------|-------------|
+| `npm run lint` | Run linting checks across all files |
+| `npm run lint:changed` | Check linting issues only in changed files |
+| `npm run lint:fix` | Automatically fix linting issues across all files |
 
-### Code Linting
+| Command | Description |
+|---------|-------------|
+| `npm run check` | Run both formatting and linting checks on all files |
+| `npm run check:changed` | Run checks only on changed files |
+| `npm run check:fix` | Automatically fix both formatting and linting issues |
 
-This project uses ESLint with Prettier to maintain code quality and consistent style. Before committing code, follow these steps:
-
-- Run Linting: Use `npm run lint` to check for any linting errors.
-- Fix Issues: Run `npm run lint:fix` to automatically fix issues where possible.
-- Check Errors Only: Use `npm run lint:check` to show errors only.
-
-  ESLint configuration is in `.eslint.config.mjs` file.
+*Note: Use Biome extension with your IDE to see lints while you type and apply code fixes.*
 
 ### Running Tests
 
