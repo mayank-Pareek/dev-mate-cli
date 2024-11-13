@@ -1,11 +1,12 @@
 import isAsyncIterable from '../../src/utils/checkIterable';
-import { ChatCompletionChunk } from 'openai/resources';
+import type { ChatCompletionChunk } from 'openai/resources';
 
 // Mock ChatCompletionChunk
-const mockAsyncIterable = async function* (): AsyncIterable<ChatCompletionChunk> {
-  yield { id: 'chunk1' } as ChatCompletionChunk;
-  yield { id: 'chunk2' } as ChatCompletionChunk;
-};
+const mockAsyncIterable =
+  async function* (): AsyncIterable<ChatCompletionChunk> {
+    yield { id: 'chunk1' } as ChatCompletionChunk;
+    yield { id: 'chunk2' } as ChatCompletionChunk;
+  };
 
 describe('isAsyncIterable', () => {
   test('should return true for an async iterable object', () => {

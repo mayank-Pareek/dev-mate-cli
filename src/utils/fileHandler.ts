@@ -1,5 +1,5 @@
-import fs from 'fs/promises';
-import path from 'path';
+import fs from 'node:fs/promises';
+import path from 'node:path';
 
 /**
  * Receive a file and process it
@@ -13,6 +13,7 @@ export async function processFile(
   filePath: string,
   operation: 'read' | 'write',
   data?: string | null,
+  // biome-ignore lint/suspicious/noConfusingVoidType: <explanation>
 ): Promise<string | void> {
   try {
     if (operation === 'read') {
@@ -21,6 +22,7 @@ export async function processFile(
         throw new Error('File is empty');
       }
       return fileData;
+      // biome-ignore lint/style/noUselessElse: <explanation>
     } else if (operation === 'write' && data) {
       // Check if file exists and has content
       try {
@@ -30,8 +32,7 @@ export async function processFile(
             `Warning: File ${filePath} already contains data. New data will be appended.`,
           );
         }
-        // eslint-disable-next-line no-unused-vars
-      } catch (error) {
+      } catch (_error) {
         // File doesn't exist or can't be read, which is fine for a write operation
       }
       await fs.appendFile(filePath, data);
@@ -55,7 +56,6 @@ export async function processFilesAndCollectData(
   let combinedData = '';
 
   // Function to check paths recursively
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   async function processPath(p: string) {
     try {
       const stat = await fs.stat(p); // Check if it's a file or directory
@@ -67,7 +67,7 @@ export async function processFilesAndCollectData(
         }
       } else if (stat.isFile()) {
         const data = await processFile(p, 'read'); // Process the file directly
-        if (data) combinedData += data + '\n'; // Collect file data
+        if (data) combinedData += `${data}\n`; // Collect file data
       } else {
         console.warn(`'${p}' is neither a file nor a directory.`);
       }

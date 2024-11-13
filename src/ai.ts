@@ -18,7 +18,7 @@ export const getAIOptions = (): AIOptions => {
   const opts = program.opts() || {};
   return {
     model: opts.model || 'google/gemma-2-9b-it:free',
-    temperature: opts.temperature ? parseFloat(opts.temperature) : 0.7,
+    temperature: opts.temperature ? Number.parseFloat(opts.temperature) : 0.7,
     stream: opts.stream,
     output: opts.output,
     tokenUsage: opts.tokenUsage,
@@ -41,11 +41,10 @@ export const initializeConnection = (): void => {
 };
 
 // Function to handle AI responses
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const handleAIResponse = async (completion: any, options: AIOptions) => {
-  let promptTokens = 0,
-    completionTokens = 0,
-    totalTokens = 0;
+  let promptTokens = 0;
+  let completionTokens = 0;
+  let totalTokens = 0;
   if (options.stream && isAsyncIterable(completion)) {
     const collectedChunks: string[] = [];
     for await (const chunk of completion) {

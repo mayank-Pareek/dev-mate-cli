@@ -5,13 +5,13 @@ const originalConsoleLog = console.log;
 // Mock dependencies before importing modules
 console.error = jest.fn();
 console.log = jest.fn();
-jest.mock('fs');
-jest.mock('os');
-jest.mock('path');
+jest.mock('node:fs');
+jest.mock('node:os');
+jest.mock('node:path');
 
-import fs from 'fs';
-import os from 'os';
-import path from 'path';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
 import { loadConfig } from '../../src/utils/loadConfig';
 
 describe('Testing loadConfig.ts', () => {

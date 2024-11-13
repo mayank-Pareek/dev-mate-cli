@@ -6,7 +6,7 @@
     "useIgnoreFile": true,
     "defaultBranch": "main"
   },
-  "files": { "ignoreUnknown": false, "ignore": [] },
+  "files": { "ignoreUnknown": false, "ignore": ["examples/*"] },
   "formatter": {
     "enabled": true,
     "formatWithErrors": false,
@@ -42,10 +42,16 @@
         "noUnusedVariables": "error",
         "useExhaustiveDependencies": "error"
       },
+      "performance": {
+        "noDelete": "warn"
+      },
       "suspicious": {
         "noExplicitAny": "warn"
+      },
+      "style": {
+        "useNodejsImportProtocol": "warn"
+      }
     }
-  }
   },
   "javascript": {
     "formatter": {

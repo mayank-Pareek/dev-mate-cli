@@ -1,6 +1,6 @@
-import * as os from 'os';
-import path from 'path';
-import * as fs from 'fs';
+import * as os from 'node:os';
+import path from 'node:path';
+import * as fs from 'node:fs';
 import * as toml from 'toml';
 
 // Configuration for LLM Model
@@ -16,7 +16,7 @@ interface Config {
 export const loadConfig = (): Config | null => {
   const homeDir = os.homedir();
   const configFilePath = path.join(homeDir, '.dev-mate-cli.toml');
-  let configFileContent;
+  let configFileContent: string;
   try {
     // Try loading from .toml file first
     console.log(`Reading TOML config from ${configFilePath}`);
@@ -39,7 +39,7 @@ export const loadConfig = (): Config | null => {
           return null;
         }
       } catch (jsonFileError: any) {
-        if (jsonFileError.code != 'ENOENT') {
+        if (jsonFileError.code !== 'ENOENT') {
           console.error(
             'Error reading .json configuration file:',
             jsonFileError,
@@ -59,10 +59,10 @@ const config: Config | null = loadConfig();
 // Check if data types in file are appropriate
 if (config) {
   if (
-    (config.model !== undefined && typeof config.model != 'string') ||
+    (config.model !== undefined && typeof config.model !== 'string') ||
     (config.temperature !== undefined &&
-      typeof config.temperature != 'string') ||
-    (config.output !== undefined && typeof config.output != 'string')
+      typeof config.temperature !== 'string') ||
+    (config.output !== undefined && typeof config.output !== 'string')
   ) {
     console.error('error in configuration data types, must be string');
     process.exit(1);

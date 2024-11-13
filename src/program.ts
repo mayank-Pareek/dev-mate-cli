@@ -28,7 +28,7 @@ program
   ) // Option to set the model temperature
   .option('-u, --token-usage', 'output token usage data') // Option to display token usage data
   .argument('<paths...>') // Define the required path argument
-  .action(async function (paths: string[]) {
+  .action(async (paths: string[]) => {
     try {
       // Call the new function to process files and collect their data
       const filesData = await processFilesAndCollectData(paths);
