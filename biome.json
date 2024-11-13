@@ -41,8 +41,11 @@
       "correctness": {
         "noUnusedVariables": "error",
         "useExhaustiveDependencies": "error"
-      }
+      },
+      "suspicious": {
+        "noExplicitAny": "warn"
     }
+  }
   },
   "javascript": {
     "formatter": {
