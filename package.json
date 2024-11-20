@@ -1,10 +1,10 @@
 {
   "name": "dev-mate-cli",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "command line tool using LLMs for code documentation",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
-    "start": "node dist/index.js",
+    "start": "node dist/src/index.js",
     "build": "tsc",
     "dev": "ts-node src/index.ts",
     "check": "biome check",
@@ -19,6 +19,9 @@
     "test": "jest -c jest.config.js --runInBand --",
     "test:watch": "jest -c jest.config.js --runInBand --watch --",
     "coverage": "jest -c jest.config.js --runInBand --coverage"
+  },
+  "bin": {
+  "dev-mate-cli": "./dist/src/index.js"
   },
   "repository": {
     "type": "git",
@@ -38,7 +41,6 @@
     "@types/node": "^22.5.4",
     "dotenv": "^16.4.5",
     "jest": "^29.7.0",
-    "nock": "^13.5.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.2"
   },
