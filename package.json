@@ -1,6 +1,6 @@
 {
   "name": "dev-mate-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "command line tool using LLMs for code documentation",
   "main": "index.ts",
   "scripts": {
@@ -21,7 +21,7 @@
     "coverage": "jest -c jest.config.js --runInBand --coverage"
   },
   "bin": {
-  "dev-mate-cli": "./dist/src/index.js"
+    "dev-mate-cli": "./dist/src/index.js"
   },
   "repository": {
     "type": "git",
