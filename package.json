@@ -1,6 +1,6 @@
 {
   "name": "dev-mate-cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "command line tool using LLMs for code documentation",
   "main": "index.ts",
   "scripts": {
