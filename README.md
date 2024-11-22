@@ -8,9 +8,22 @@ Watch this [Demo video](https://youtu.be/YJDD6YBaEFk) to view features.
 
 - **Source Code Documentation**: Automatically generate comments and documentation for your source code.
 - **Multiple File Processing**: Handle one or multiple files in a single command.
-- **Model Selection**: Choose which AI model to use with the `--model` flag.
+- **Model Selection**: Use AI model of your choice with the `--model` flag.
 - **Custom Output**: Output the results to a file with the `--output` flag, or display them in the console.
 - **Stream Output**: Stream the LLM response to command line with `--stream` flag.
+
+## Installation
+```bash
+npm install -g dev-mate-cli
+```
+
+### Environment Variables
+`dev-mate-cli` needs API_KEY and BASE_URL to generate responses, these variables should be stored in a `.env` file within the current directory. Make sure to use the API_KEY and BASE_URL from the same OpenAI-compatible completion API provider.
+```makefile
+API_KEY=your_api_key
+BASE_URL=https://api.openai.com/v1
+```
+ Popular providers - [OpenRouter](https://openrouter.ai/), [Groq](https://console.groq.com/), [OpenAI](https://openai.com/api/).
 
 ## Usage
 
@@ -19,64 +32,62 @@ Watch this [Demo video](https://youtu.be/YJDD6YBaEFk) to view features.
 To run the tool, specify one or more source files or folders as input:
 
 ```bash
-npm start ./examples/file.js
+dev-mate-cli ./examples/file.js
 ```
 
 For processing multiple files:
 
 ```bash
-npm start ./examples/file.js ./examples/file.cpp
+dev-mate-cli ./examples/file.js ./examples/file.cpp
 ```
 
 For processing folders:
 
 ```bash
-npm start ./examples
+dev-mate-cli ./examples
 ```
 
 ### Command-line Options
 
-Note: Use `npm start -- -option` to pass the option flag to the program, as npm captures it without the `--`.
-
 - `-m, --model <model-name>`: Choose the AI model to use `(default: google/gemma-2-9b-it:free from OpenRouter)`.
 
   ```bash
-  npm start file.js -- -m "openai/gpt-4o-mini"
+  dev-mate-cli file.js -m "openai/gpt-4o-mini"
   ```
 
 - `-o, --output <output-file>`: Write the output to a specified file.
 
   ```bash
-  npm start file.js -- -o output.js
+  dev-mate-cli file.js -o output.js
   ```
 
 - `-t, --temperature <value>`: Set the creativity level of the AI model `(default: 0.7)`.
 
   ```bash
-  npm start file.js -- -t 1.1
+  dev-mate-cli file.js -t 1.1
   ```
 
 - `-u, --token-usage`: Display token usage information
 
   ```bash
-  npm start file.js -- -u
+  dev-mate-cli file.js -u
   ```
 
 - `-s, --stream`: Stream response to command line
 
   ```bash
-  npm start file.js -- -s
+  dev-mate-cli file.js -s
   ```
 
 ### Additional Commands
 
 - **Check Version:** To check the current version of the tool, use:
   ```bash
-  npm start -- --version
+  dev-mate-cli --version
   ```
 - **Help:** Display the help message listing all available options:
   ```bash
-  npm start -- --help
+  dev-mate-cli --help
   ```
 
 ### Examples
@@ -84,25 +95,24 @@ Note: Use `npm start -- -option` to pass the option flag to the program, as npm 
 - **Document a JavaScript file and save the result:**
 
   ```bash
-  npm start ./examples/file.js -- --output file-documented.js --model google/gemini-flash-8b-1.5-exp
+  dev-mate-cli ./examples/file.js --output file-documented.js --model google/gemini-flash-8b-1.5-exp
   ```
 
 - **Process multiple files and print output to the console:**
 
   ```bash
-  npm start ./examples/file.js ./examples/file.py --model google/gemini-flash-8b-1.5-exp
+  dev-mate-cli ./examples/file.js ./examples/file.py --model google/gemini-flash-8b-1.5-exp
   ```
 
-## Environment Variables
+### LLM Configuration
+To use a file for LLM configuration, create a `dotfile` named `.dev-mate-cli.toml` in the home directory of your system.
 
-You can store your api key and base url in a `.env` file created at the root of the project. Example configuration:
+Ex: `~/.dev-mate-cli.toml`:
 
-```makefile
-API_KEY=your_api_key
-BASE_URL=https://api.openai.com/v1
-```
-
-This setup will also allow you to customize other settings, like temperature or base URL, directly in the `.env` file.
+  ```
+  model = "gpt-4o"
+  temperature = "1"
+  ```
 
 ## Contributing
 
